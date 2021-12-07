@@ -7,6 +7,7 @@ use RadicalLoop\Eod\Traits\Actionable;
 class Exchange extends EodClient
 {
     use Actionable;
+
     /**
      * url segment for exchange api
      *
@@ -17,8 +18,10 @@ class Exchange extends EodClient
     /**
      * Set Get Exchange Symbols api
      * url : https://eodhistoricaldata.com/knowledgebase/list-symbols-exchange/
-     * @param string $symbol
-     * @param array $params
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
      * @return Exchange
      */
     public function symbol($symbol, $params = [])
@@ -30,8 +33,10 @@ class Exchange extends EodClient
     /**
      * Set Multiple Tickers api
      * url: https://eodhistoricaldata.com/knowledgebase/multiple-tickers-download/
-     * @param string $symbol
-     * @param array $params
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
      * @return Exchange
      */
     public function multipleTicker($symbol, $params = [])
@@ -40,17 +45,34 @@ class Exchange extends EodClient
         $this->setParams($symbol, $params);
         return $this;
     }
-    
-     /**
+
+    /**
      * Get exchange details api
      * url: https://eodhistoricaldata.com/financial-apis/exchanges-api-trading-hours-and-holidays/
-     * @param string $symbol
-     * @param array $params
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
      * @return Exchange
      */
     public function details($symbol, $params = [])
     {
         $this->urlSegment = '/exchange-details';
+        $this->setParams($symbol, $params);
+        return $this;
+    }
+
+    /**
+     * Return a list of supported symbols.
+     *
+     * @param  string $symbol   The symbol of the exchange, for example "cc" -> for cryptocurrencies, "us" -> for all us tickers.
+     * @param  array  $params A list of optional parameters attached to the query, for example "fmt" => "json".
+     *
+     * @return $this
+     */
+    public function list(string $symbol, array $params = []): Exchange
+    {
+        $this->urlSegment = '/exchange-symbol-list';
         $this->setParams($symbol, $params);
         return $this;
     }
