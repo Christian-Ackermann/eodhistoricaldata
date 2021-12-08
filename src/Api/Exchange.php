@@ -23,6 +23,7 @@ class Exchange extends EodClient
      * @param  array  $params
      *
      * @return Exchange
+     * @deprecated There is a newer api available, please use "list" instead.
      */
     public function symbol($symbol, $params = [])
     {
