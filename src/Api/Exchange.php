@@ -65,12 +65,12 @@ class Exchange extends EodClient
     /**
      * Return a list of supported symbols.
      *
-     * @param  string $symbol   The symbol of the exchange, for example "cc" -> for cryptocurrencies, "us" -> for all us tickers.
+     * @param  string $symbol The symbol of the exchange, for example "cc" -> for cryptocurrencies, "us" -> for all us tickers.
      * @param  array  $params A list of optional parameters attached to the query, for example "fmt" => "json".
      *
      * @return $this
      */
-    public function list(string $symbol, array $params = []): Exchange
+    public function list($symbol, $params = []): Exchange
     {
         $this->urlSegment = '/exchange-symbol-list';
         $this->setParams($symbol, $params);

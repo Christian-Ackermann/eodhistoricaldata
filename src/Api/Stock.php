@@ -11,8 +11,10 @@ class Stock extends EodClient
     /**
      * Live/Realtime Stock Prices API
      * url: https://eodhistoricaldata.com/knowledgebase/live-realtime-stocks-api/
-     * @param string $symbol
-     * @param array $params
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
      * @return Stock
      */
     public function realTime($symbol, $params = [])
@@ -23,12 +25,14 @@ class Stock extends EodClient
     }
 
     /**
-    * Stock and ETFs Fundamental Data
-    * url: https://eodhistoricaldata.com/knowledgebase/stock-etfs-fundamental-data-feeds/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Stock and ETFs Fundamental Data
+     * url: https://eodhistoricaldata.com/knowledgebase/stock-etfs-fundamental-data-feeds/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function fundamental($symbol, $params = [])
     {
         $this->urlSegment = '/fundamentals';
@@ -37,12 +41,14 @@ class Stock extends EodClient
     }
 
     /**
-    * Get Share Dividends
-    * url: https://eodhistoricaldata.com/knowledgebase/api-splits-dividends/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Get Share Dividends
+     * url: https://eodhistoricaldata.com/knowledgebase/api-splits-dividends/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function dividend($symbol, $params = [])
     {
         $this->urlSegment = '/div';
@@ -51,12 +57,14 @@ class Stock extends EodClient
     }
 
     /**
-    * Get Share Splits
-    * url: https://eodhistoricaldata.com/knowledgebase/api-splits-dividends/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Get Share Splits
+     * url: https://eodhistoricaldata.com/knowledgebase/api-splits-dividends/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function splits($symbol, $params = [])
     {
         $this->urlSegment = '/splits';
@@ -65,12 +73,14 @@ class Stock extends EodClient
     }
 
     /**
-    * Stock Price Data API (End-Of-Day)
-    * url: https://eodhistoricaldata.com/knowledgebase/api-for-historical-data-and-volumes/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Stock Price Data API (End-Of-Day)
+     * url: https://eodhistoricaldata.com/knowledgebase/api-for-historical-data-and-volumes/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function eod($symbol, $params = [])
     {
         $this->urlSegment = '/eod';
@@ -79,12 +89,14 @@ class Stock extends EodClient
     }
 
     /**
-    * Technical Indicator API
-    * url: https://eodhistoricaldata.com/financial-apis/technical-indicators-api/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Technical Indicator API
+     * url: https://eodhistoricaldata.com/financial-apis/technical-indicators-api/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function technical($symbol, $params = [])
     {
         $this->urlSegment = '/technical';
@@ -93,17 +105,35 @@ class Stock extends EodClient
     }
 
     /**
-    * Yahoo Finance API Support
-    * url: https://eodhistoricaldata.com/knowledgebase/api-for-historical-data-and-volumes/
-    * @param string $symbol
-    * @param array $params
-    * @return Stock
-    */
+     * Yahoo Finance API Support
+     * url: https://eodhistoricaldata.com/knowledgebase/api-for-historical-data-and-volumes/
+     *
+     * @param  string $symbol
+     * @param  array  $params
+     *
+     * @return Stock
+     */
     public function yahoo($symbol, $params = [])
     {
         $params = array_merge($params, ['s' => $symbol]);
         $this->urlSegment = '/table.csv';
         $this->setParams(null, $params);
+        return $this;
+    }
+
+    /**
+     * Perform a search by symbol, isin, company name with a default limit of 15 entries up to 50 with "limit => 50".
+     *
+     * @param  string $text   The value to be searched.
+     * @param  array  $params Addintional parameters like "limit", "type" ...
+     *
+     * @return $this
+     * @link https://eodhistoricaldata.com/financial-apis/search-api-for-stocks-etfs-mutual-funds-and-indices/
+     */
+    public function search($text, $params = [])
+    {
+        $this->urlSegment = '/search';
+        $this->setParams($text, $params);
         return $this;
     }
 }
