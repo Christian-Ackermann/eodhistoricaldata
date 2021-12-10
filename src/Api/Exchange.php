@@ -16,17 +16,16 @@ class Exchange extends EodClient
     protected $urlSegment = '/exchanges';
 
     /**
-     * Set Get Exchange Symbols api
-     * url : https://eodhistoricaldata.com/knowledgebase/list-symbols-exchange/
+     * Return a list of supported symbols.
      *
-     * @param  string $symbol
-     * @param  array  $params
+     * @param  string $symbol The symbol of the exchange, for example "cc" -> for cryptocurrencies, "us" -> for all us tickers.
+     * @param  array  $params A list of optional parameters attached to the query, for example "fmt" => "json".
      *
-     * @return Exchange
-     * @deprecated There is a newer api available, please use "list" instead.
+     * @return $this
      */
-    public function symbol($symbol, $params = [])
+    public function symbol(string $symbol, array $params = []): Exchange
     {
+        $this->urlSegment = '/exchange-symbol-list';
         $this->setParams($symbol, $params);
         return $this;
     }
@@ -59,21 +58,6 @@ class Exchange extends EodClient
     public function details($symbol, $params = [])
     {
         $this->urlSegment = '/exchange-details';
-        $this->setParams($symbol, $params);
-        return $this;
-    }
-
-    /**
-     * Return a list of supported symbols.
-     *
-     * @param  string $symbol The symbol of the exchange, for example "cc" -> for cryptocurrencies, "us" -> for all us tickers.
-     * @param  array  $params A list of optional parameters attached to the query, for example "fmt" => "json".
-     *
-     * @return $this
-     */
-    public function list($symbol, $params = []): Exchange
-    {
-        $this->urlSegment = '/exchange-symbol-list';
         $this->setParams($symbol, $params);
         return $this;
     }
