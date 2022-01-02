@@ -58,7 +58,7 @@ class Stock extends EodClient
 
     /**
      * Get Share Splits
-     * url: https://eodhistoricaldata.com/knowledgebase/api-splits-dividends/
+     * url: https://eodhistoricaldata.com/api/splits/
      *
      * @param  string $symbol
      * @param  array  $params
